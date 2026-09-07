@@ -24,7 +24,7 @@ export default Alchemy.Stack(
         VITE_SERVER_URL: Config.string("VITE_SERVER_URL"),
       },
       dev: {
-        port: 3001,
+        port: 3000,
       },
     });
 

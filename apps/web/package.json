@@ -4,11 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "vite dev",
     "build": "vite build",
     "serve": "vite preview",
     "start": "vite",
-    "types:check": "vite build && tsc --noEmit",
-    "dev:bare": "vite dev"
+    "types:check": "vite build && tsc --noEmit"
   },
   "dependencies": {
     "@stay/env": "workspace:*",

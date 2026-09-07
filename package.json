@@ -21,6 +21,7 @@
     "dev": "turbo run dev",
     "dev:server": "turbo run dev -F server",
     "dev:web": "turbo run dev -F web",
+    "dev:infra": "turbo run dev:infra -F @stay/infra",
     "docker:build": "docker compose build --pull",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
