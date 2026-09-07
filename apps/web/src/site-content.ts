@@ -19,6 +19,11 @@ export const siteContent = {
     title: "Your account",
     signedInAs: (email: string) => `Signed in as ${email}.`,
   },
+  notFound: {
+    title: "Page not found",
+    description: "That page does not exist, or it has moved.",
+    backHome: "Back to home",
+  },
   footer: {
     copyright: (year: number) => `© ${year} stay`,
   },

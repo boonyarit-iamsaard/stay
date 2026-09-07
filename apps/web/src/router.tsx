@@ -1,6 +1,7 @@
 import { createRouter } from "@tanstack/react-router";
 
 import { Loader } from "./components/loader";
+import { NotFound } from "./components/not-found";
 import { routeTree } from "./routeTree.gen";
 
 export function getRouter() {
@@ -9,6 +10,7 @@ export function getRouter() {
     defaultPreload: "intent",
     scrollRestoration: true,
     defaultPendingComponent: () => <Loader />,
+    defaultNotFoundComponent: () => <NotFound />,
   });
 }
 
