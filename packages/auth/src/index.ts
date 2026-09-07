@@ -13,7 +13,7 @@ export function createAuth() {
       schema,
       usePlural: true,
     }),
-    trustedOrigins: [env.CORS_ORIGIN],
+    trustedOrigins: env.CORS_ORIGIN,
     emailAndPassword: {
       enabled: true,
     },
@@ -26,6 +26,18 @@ export function createAuth() {
         // generate a v4 id itself, and its validation rejects v7 ids.
         generateId: false,
       },
+      // The portal server-renders its public pages, and an SSR loader can only
+      // forward a session cookie the browser actually sent it. That needs the
+      // cookie scoped to the parent domain shared by `foo.com` and
+      // `api.foo.com`. Left off locally, where everything is on `localhost`.
+      ...(env.COOKIE_DOMAIN
+        ? {
+            crossSubDomainCookies: {
+              enabled: true,
+              domain: env.COOKIE_DOMAIN,
+            },
+          }
+        : {}),
       defaultCookieAttributes: {
         sameSite: "none",
         secure: true,

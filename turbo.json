@@ -17,10 +17,6 @@
       "cache": false,
       "persistent": true
     },
-    "dev:infra": {
-      "cache": false,
-      "persistent": true
-    },
     "db:push": {
       "cache": false,
       "interactive": true
@@ -49,14 +45,6 @@
     },
     "db:down": {
       "cache": false
-    },
-    "deploy": {
-      "cache": false,
-      "interactive": true
-    },
-    "destroy": {
-      "cache": false,
-      "interactive": true
     }
   }
 }

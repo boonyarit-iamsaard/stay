@@ -49,8 +49,23 @@ and was dropped, rather than assume it never applied.
 - `apps/server` remains the single API. `apps/web` calls it over Railway's private
   network during SSR; it does not open a second path into `@stay/db`. Booking,
   availability, and pricing rules stay in one place.
-- The root route sets `ssr: false`; public routes opt in. A new authenticated route
-  therefore cannot accidentally server-render and fail on a missing session.
+- Authenticated screens live under the `_account` and `_auth` pathless layouts,
+  which set `ssr: false`; the public `_public` layout sets `ssr: true`. A route
+  added under those layouts therefore cannot accidentally server-render and fail
+  on a missing session.
+
+  This is not the shape first written down here, which was "the root route sets
+  `ssr: false`; public routes opt in". That does not work: Start's selective SSR
+  lets a child route make its inherited value _more_ restrictive only, so under
+  an `ssr: false` root a public route's `ssr: true` is ignored — as is a route's
+  `ssr: true` under `defaultSsr: false`. Both were tried against a real build,
+  and both left every route client-rendered. Opting out per subtree gets the
+  property the decision was after, one layout lower down.
+
+  The guarantee is therefore scoped to those two subtrees: a route added
+  _outside_ them inherits the root, which server-renders. Authenticated screens
+  belong under `_account`.
+
 - `apps/web` and `apps/server` must sit on a shared parent domain (`foo.com` /
   `api.foo.com`) with Better Auth `crossSubDomainCookies` scoped to `.foo.com`, so
   SSR loaders can forward the session cookie. **Custom domains are mandatory in every

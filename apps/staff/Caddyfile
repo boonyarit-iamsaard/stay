@@ -1,0 +1,14 @@
+# Railway injects PORT; 3000 matches the dev server for local runs.
+:{$PORT:3000} {
+	root * /srv
+	encode gzip zstd
+
+	# Hashed asset filenames can be cached forever; index.html must not be.
+	@assets path /assets/*
+	header @assets Cache-Control "public, immutable, max-age=31536000"
+	header /index.html Cache-Control "no-cache"
+
+	# Client-side routing: unknown paths are routes, not missing files.
+	try_files {path} /index.html
+	file_server
+}

@@ -20,11 +20,8 @@
       "!**/.nuxt",
       "!bts.jsonc",
       "!**/.expo",
-      "!**/.wrangler",
-      "!**/.alchemy",
       "!**/.svelte-kit",
       "!**/.pnpm-store",
-      "!**/wrangler.jsonc",
       "!**/.source",
       "!**/convex/_generated"
     ]
@@ -85,7 +82,7 @@
   },
   "overrides": [
     {
-      "includes": ["apps/staff/src/**"],
+      "includes": ["apps/staff/src/**", "apps/web/src/**"],
       "linter": {
         "rules": {
           "style": {

@@ -1,3 +1,4 @@
+import { serve } from "@hono/node-server";
 import { auth } from "@stay/auth";
 import { env } from "@stay/env/server";
 import { Hono } from "hono";
@@ -23,7 +24,14 @@ app.get("/", (c) => {
   return c.text("OK");
 });
 
-import { serve } from "@hono/node-server";
+/**
+ * Throwaway. It exists so the portal has something real to server-render
+ * against while the booking API is still being built, and so container
+ * healthchecks have a JSON endpoint. Delete it once real resources land.
+ */
+app.get("/health", (c) => {
+  return c.json({ status: "ok", checkedAt: new Date().toISOString() });
+});
 
 serve(
   {

@@ -1,0 +1,96 @@
+# The three apps, built from the same Dockerfiles Railway builds. Compose reads
+# this file automatically on top of docker-compose.yml, so `pnpm docker:up`
+# reproduces production locally while `pnpm db:start` still starts infra alone.
+#
+# What this does NOT reproduce is the cookie scope. Better Auth shares the
+# session across `foo.com` and `api.foo.com` via a cookie on the parent domain;
+# on localhost the apps differ by port, and ports are not part of a cookie's
+# origin, so the session is shared here for a different reason than it is in
+# production. Only a real custom domain exercises the production path
+# (docs/adr/0001).
+services:
+  web:
+    container_name: stay-web
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        VITE_SERVER_URL: ${VITE_SERVER_URL:-http://localhost:4000}
+    init: true
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      # Container-to-container, the API is reachable by service name. This is
+      # the local stand-in for Railway's private network.
+      SERVER_INTERNAL_URL: http://server:4000
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://localhost:3001/').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    depends_on:
+      server:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - stay-network
+
+  staff:
+    container_name: stay-staff
+    build:
+      context: .
+      dockerfile: apps/staff/Dockerfile
+      args:
+        VITE_SERVER_URL: ${VITE_SERVER_URL:-http://localhost:4000}
+    init: true
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+    depends_on:
+      server:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - stay-network
+
+  server:
+    container_name: stay-server
+    build:
+      context: .
+      dockerfile: apps/server/Dockerfile
+    init: true
+    ports:
+      - "4000:4000"
+    env_file:
+      - path: apps/server/.env
+        required: false
+    environment:
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-password}@postgres:5432/stay
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000,http://localhost:3001}
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://localhost:4000/health').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - stay-network
