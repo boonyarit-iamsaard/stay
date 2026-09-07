@@ -218,9 +218,6 @@ importers:
 
   apps/web:
     dependencies:
-      '@hono/node-server':
-        specifier: ^2.0.12
-        version: 2.1.1(hono@4.13.5)
       '@stay/env':
         specifier: workspace:*
         version: link:../../packages/env
@@ -239,15 +236,9 @@ importers:
       better-auth:
         specifier: 'catalog:'
         version: 1.7.2(@cloudflare/workers-types@5.20260904.1)(@tanstack/react-start@1.168.49(esbuild@0.28.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vite@8.2.2(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.0)))(drizzle-kit@0.31.10)(drizzle-orm@0.45.2(@cloudflare/workers-types@5.20260904.1)(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(kysely@0.29.5)(pg@8.23.0))(pg@8.23.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vitest@4.1.11(@types/node@26.4.1)(vite@8.2.2(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.0)))
-      hono:
-        specifier: ^4.12.32
-        version: 4.13.5
       lucide-react:
         specifier: 'catalog:'
         version: 1.41.0(react@19.2.8)
-      next-themes:
-        specifier: 'catalog:'
-        version: 0.4.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react:
         specifier: 'catalog:'
         version: 19.2.8
@@ -257,6 +248,9 @@ importers:
       sonner:
         specifier: 'catalog:'
         version: 2.0.8(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      srvx:
+        specifier: ^0.11.22
+        version: 0.11.22
       zod:
         specifier: 'catalog:'
         version: 4.5.4
