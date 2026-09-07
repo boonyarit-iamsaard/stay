@@ -1,5 +1,5 @@
-# Railway injects PORT; 3000 matches the dev server for local runs.
-:{$PORT:3000} {
+# Railway injects PORT; 4000 matches the dev server for local runs.
+:{$PORT:4000} {
 	root * /srv
 	encode gzip zstd
 

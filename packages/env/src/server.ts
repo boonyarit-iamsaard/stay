@@ -22,7 +22,7 @@ export const env = createEnv({
     // needs real custom domains. See docs/adr/0001.
     COOKIE_DOMAIN: z.string().min(1).optional(),
     // Railway injects PORT at run time. The default covers local development.
-    PORT: z.coerce.number().int().positive().default(4000),
+    PORT: z.coerce.number().int().positive().default(5000),
     NODE_ENV: z
       .enum(["development", "production", "test"])
       .default("development"),

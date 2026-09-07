@@ -38,8 +38,8 @@ cp apps/staff/.env.example apps/staff/.env
 cp apps/web/.env.example apps/web/.env
 ```
 
-The staff app runs on port 3000, the customer portal on 3001, and the server on
-port 4000. `CORS_ORIGIN` is a comma-separated list, because both frontends call
+The customer portal runs on port 3000, the staff app on 4000, and the server on
+port 5000. `CORS_ORIGIN` is a comma-separated list, because both frontends call
 the same API.
 
 ## Database Setup
@@ -61,9 +61,9 @@ Then, run the development server:
 pnpm run dev
 ```
 
-Open [http://localhost:3001](http://localhost:3001) for the customer portal and
-[http://localhost:3000](http://localhost:3000) for the staff application.
-The API is running at [http://localhost:4000](http://localhost:4000).
+Open [http://localhost:3000](http://localhost:3000) for the customer portal and
+[http://localhost:4000](http://localhost:4000) for the staff application.
+The API is running at [http://localhost:5000](http://localhost:5000).
 
 ## UI Customization
 
@@ -98,9 +98,9 @@ a Dockerfile and is deployed as its own service.
 
 | Service  | Dockerfile               | Port | Notes                            |
 | -------- | ------------------------ | ---- | -------------------------------- |
-| `web`    | `apps/web/Dockerfile`    | 3001 | Customer portal, server-rendered |
-| `server` | `apps/server/Dockerfile` | 4000 | The single API                   |
-| `staff`  | `apps/staff/Dockerfile`  | 3000 | Static SPA, served by Caddy      |
+| `web`    | `apps/web/Dockerfile`    | 3000 | Customer portal, server-rendered |
+| `staff`  | `apps/staff/Dockerfile`  | 4000 | Static SPA, served by Caddy      |
+| `server` | `apps/server/Dockerfile` | 5000 | The single API                   |
 
 ### Custom domains are mandatory
 
@@ -122,7 +122,7 @@ variable. `web` and `staff` therefore need one image per environment.
 
 `SERVER_INTERNAL_URL` is the opposite: it is read only by the portal's SSR
 process, at run time. Point it at the API's private network address
-(`http://server.railway.internal:4000`) so server-rendered requests never leave
+(`http://server.railway.internal:5000`) so server-rendered requests never leave
 the project.
 
 ### Docker Compose

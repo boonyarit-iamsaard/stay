@@ -27,4 +27,4 @@ FROM caddy:2-alpine AS runner
 COPY --from=builder /app/apps/staff/dist /srv
 COPY apps/staff/Caddyfile /etc/caddy/Caddyfile
 
-EXPOSE 3000
+EXPOSE 4000

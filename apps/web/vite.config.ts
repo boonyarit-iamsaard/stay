@@ -5,8 +5,8 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   server: {
-    // 3000 belongs to apps/staff, 4000 to apps/server.
-    port: 3001,
+    // 4000 belongs to apps/staff, 5000 to apps/server.
+    port: 3000,
   },
   resolve: {
     tsconfigPaths: true,

@@ -30,7 +30,7 @@ COPY --from=builder /app /app
 
 USER node
 
-EXPOSE 3001
+EXPOSE 3000
 
 WORKDIR /app/apps/web
 CMD ["node", "serve.js"]

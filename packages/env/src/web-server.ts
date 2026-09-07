@@ -10,12 +10,12 @@ import { z } from "zod";
 export const env = createEnv({
   server: {
     // Railway's private network address for `apps/server`, e.g.
-    // `http://server.railway.internal:4000`. SSR loaders prefer it so the call
+    // `http://server.railway.internal:5000`. SSR loaders prefer it so the call
     // never leaves the project; the browser keeps using VITE_SERVER_URL.
     // Unset in local development, where the public URL is already local.
     SERVER_INTERNAL_URL: z.url().optional(),
     // Railway injects PORT at run time. The default covers local development.
-    PORT: z.coerce.number().int().positive().default(3001),
+    PORT: z.coerce.number().int().positive().default(3000),
     NODE_ENV: z
       .enum(["development", "production", "test"])
       .default("development"),

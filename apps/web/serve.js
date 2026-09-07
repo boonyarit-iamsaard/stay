@@ -28,7 +28,7 @@ app.use(
 app.all("/*", (c) => handler.fetch(c.req.raw));
 
 // Railway injects PORT at run time. The default matches the dev server.
-const port = Number(process.env.PORT ?? 3001);
+const port = Number(process.env.PORT ?? 3000);
 
 serve({ fetch: app.fetch, port }, (info) => {
   console.log(`Portal is running on http://localhost:${info.port}`);

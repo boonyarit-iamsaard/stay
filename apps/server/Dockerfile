@@ -24,7 +24,7 @@ COPY --from=builder /app /app
 
 USER node
 
-EXPOSE 4000
+EXPOSE 5000
 
 WORKDIR /app/apps/server
 CMD ["node", "dist/index.mjs"]

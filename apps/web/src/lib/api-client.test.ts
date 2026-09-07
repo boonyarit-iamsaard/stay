@@ -12,7 +12,7 @@ describe("resolveApiBaseUrl", () => {
       resolveApiBaseUrl({
         isServer: false,
         publicUrl: "https://api.foo.com",
-        internalUrl: "http://server.railway.internal:4000",
+        internalUrl: "http://server.railway.internal:5000",
       }),
     ).toBe("https://api.foo.com");
   });
@@ -22,9 +22,9 @@ describe("resolveApiBaseUrl", () => {
       resolveApiBaseUrl({
         isServer: true,
         publicUrl: "https://api.foo.com",
-        internalUrl: "http://server.railway.internal:4000",
+        internalUrl: "http://server.railway.internal:5000",
       }),
-    ).toBe("http://server.railway.internal:4000");
+    ).toBe("http://server.railway.internal:5000");
   });
 
   it("falls back to the public URL during SSR when no internal URL is set", () => {
