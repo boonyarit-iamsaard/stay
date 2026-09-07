@@ -1,0 +1,34 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    # Waits before proposing a release, so a bad publish has time to surface.
+    cooldown:
+      default-days: 3
+    groups:
+      # Keeps review load sane.
+      dev-dependencies:
+        dependency-type: development
+        update-types: [minor, patch]
+      prod-minor-patch:
+        dependency-type: production
+        update-types: [minor, patch]
+
+  # Without this the SHA pins rot.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: docker
+    directory: /apps/server
+    schedule:
+      interval: weekly
+    # The runtime major moves when we decide, not when a tag appears. Patch and
+    # minor still arrive weekly. Bump `FROM`, `.nvmrc`, and `engines` together.
+    ignore:
+      - dependency-name: node
+        update-types: [version-update:semver-major]

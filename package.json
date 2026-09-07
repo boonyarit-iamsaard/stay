@@ -7,6 +7,7 @@
   ],
   "type": "module",
   "scripts": {
+    "audit": "pnpm audit --audit-level moderate && pnpm audit signatures",
     "build": "turbo run build",
     "check": "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true",
     "ci": "biome ci --no-errors-on-unmatched --files-ignore-unknown=true . && pnpm format:check && pnpm lint:md && pnpm types:check && pnpm build",
@@ -18,10 +19,11 @@
     "db:stop": "docker compose stop postgres",
     "db:studio": "turbo run db:studio -F @stay/db",
     "db:watch": "docker compose up postgres",
+    "deps:outdated": "pnpm outdated -r",
     "dev": "turbo run dev",
+    "dev:infra": "turbo run dev:infra -F @stay/infra",
     "dev:server": "turbo run dev -F server",
     "dev:web": "turbo run dev -F web",
-    "dev:infra": "turbo run dev:infra -F @stay/infra",
     "docker:build": "docker compose build --pull",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
@@ -32,6 +34,10 @@
     "lint:md:fix": "markdownlint --fix \"**/*.md\" --ignore-path .gitignore",
     "prepare": "husky || true",
     "types:check": "turbo run types:check"
+  },
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": ">=11.23.0 <12"
   },
   "dependencies": {
     "@stay/env": "workspace:*",
@@ -61,6 +67,5 @@
       "markdownlint --ignore-path .gitignore"
     ]
   },
-
-  "packageManager": "pnpm@11.23.0"
+  "packageManager": "pnpm@11.23.0+sha512.f00082e5b283a199b74e079da28d155c008fe232f44c8a06ea7ddfa014ecf719fc362f790ecc67b28106ddac2afb24c49a9a079159da560b2ce7d1e98efd11af"
 }

@@ -1,11 +1,43 @@
 packages:
   - apps/*
   - packages/*
+# strictDepBuilds makes a skipped build a hard failure, not a silent one.
 allowBuilds:
   esbuild: true
   sharp: true
   msgpackr-extract: true
   workerd: true
+dangerouslyAllowAllBuilds: false
+strictDepBuilds: true
+
+# 3 days.
+minimumReleaseAge: 4320
+
+# Judge only the last 30 days: pre-2023 releases predate provenance and trip this constantly.
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 43200
+
+engineStrict: true
+verifyDepsBeforeRun: "error"
+verifyStoreIntegrity: true
+
+# Drop each of these once the parent ships a fixed range. All are scoped to the
+# offending path so an unrelated dependent is not dragged off the range it declares.
+#   esbuild <=0.24.2   GHSA-67mh-4wv8-2f99  (via @esbuild-kit, in drizzle-kit)
+#   hono, @hono/node-server, valibot, lodash reach us only through
+#   alchemy > @prisma/dev, which still pins pre-advisory ranges.
+overrides:
+  "@esbuild-kit/core-utils>esbuild": ^0.25.12
+  "@prisma/dev>hono": ^4.12.34
+  "@hono/node-server>hono": ^4.12.34
+  "@prisma/dev>@hono/node-server": ^1.19.15
+  "@prisma/dev>valibot": ^1.4.2
+  "@t3-oss/env-core>valibot": ^1.4.2
+  "chevrotain>lodash": ^4.18.1
+  "@chevrotain/cst-dts-gen>lodash": ^4.18.1
+  "@chevrotain/gast>lodash": ^4.18.1
+  "@chevrotain/utils>lodash": ^4.18.1
+
 catalog:
   dotenv: ^17.4.2
   zod: ^4.4.3
