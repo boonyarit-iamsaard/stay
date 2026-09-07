@@ -1,0 +1,24 @@
+{
+  "name": "@stay/auth",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@stay/db": "workspace:*",
+    "@stay/env": "workspace:*",
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@stay/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}
