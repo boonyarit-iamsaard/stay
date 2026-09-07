@@ -2,6 +2,7 @@ name: stay
 
 services:
   server:
+    container_name: stay-server
     build:
       context: .
       dockerfile: apps/server/Dockerfile
@@ -29,9 +30,11 @@ services:
       postgres:
         condition: service_healthy
     restart: unless-stopped
+    networks:
+      - stay-network
 
   postgres:
-    image: postgres:18
+    image: postgres:18-alpine
     container_name: stay-postgres
     environment:
       POSTGRES_DB: stay
@@ -40,13 +43,20 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - stay_postgres_data:/var/lib/postgresql
+      - stay-postgres-data:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
     restart: unless-stopped
+    networks:
+      - stay-network
 
 volumes:
-  stay_postgres_data:
+  stay-postgres-data:
+    name: stay-postgres-data
+
+networks:
+  stay-network:
+    name: stay-network
