@@ -111,7 +111,7 @@ For more details, see the guide on [Deploying with Docker Compose](https://www.b
 
 ## Project Structure
 
-```
+```text
 stay/
 ├── apps/
 │   ├── web/         # Frontend application (React + TanStack Router)
@@ -128,7 +128,7 @@ stay/
 - `pnpm run build`: Build all applications
 - `pnpm run dev:web`: Start only the web application
 - `pnpm run dev:server`: Start only the server
-- `pnpm run check-types`: Check TypeScript types across all apps
+- `pnpm run types:check`: Check TypeScript types across all apps
 - `pnpm run db:push`: Push schema changes to database
 - `pnpm run db:generate`: Generate database client/types
 - `pnpm run db:migrate`: Run database migrations
