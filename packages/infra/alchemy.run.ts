@@ -5,7 +5,7 @@ import * as Config from "effect/Config";
 import * as Effect from "effect/Effect";
 
 config({ path: "./.env" });
-config({ path: "../../apps/web/.env" });
+config({ path: "../../apps/staff/.env" });
 
 export default Alchemy.Stack(
   "stay",
@@ -14,8 +14,8 @@ export default Alchemy.Stack(
     state: Cloudflare.state(),
   },
   Effect.gen(function* () {
-    const webWorker = yield* Cloudflare.Website.Vite("web", {
-      rootDir: "../../apps/web",
+    const staffWorker = yield* Cloudflare.Website.Vite("staff", {
+      rootDir: "../../apps/staff",
       assets: {
         htmlHandling: "auto-trailing-slash",
         notFoundHandling: "single-page-application",
@@ -29,7 +29,7 @@ export default Alchemy.Stack(
     });
 
     return {
-      web: webWorker.url,
+      staff: staffWorker.url,
     };
   }),
 );

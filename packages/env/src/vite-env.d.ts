@@ -1,4 +1,4 @@
-// `vite/client` is not resolvable here (vite is only a dependency of apps/web),
+// `vite/client` is not resolvable here (vite is only a dependency of apps/staff),
 // so these are declared directly. The `export {}` makes this a module, which is
 // what lets `declare global` augment `ImportMeta` explicitly.
 

@@ -85,7 +85,7 @@
   },
   "overrides": [
     {
-      "includes": ["apps/web/src/**"],
+      "includes": ["apps/staff/src/**"],
       "linter": {
         "rules": {
           "style": {

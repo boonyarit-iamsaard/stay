@@ -33,10 +33,10 @@ examples, then replace the values:
 ```bash
 cp .env.example .env
 cp apps/server/.env.example apps/server/.env
-cp apps/web/.env.example apps/web/.env
+cp apps/staff/.env.example apps/staff/.env
 ```
 
-The web app runs on port 3000. The server runs on port 4000.
+The staff app runs on port 3000. The server runs on port 4000.
 
 ## Database Setup
 
@@ -57,7 +57,7 @@ Then, run the development server:
 pnpm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the web application.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the staff application.
 The API is running at [http://localhost:4000](http://localhost:4000).
 
 ## UI Customization
@@ -66,7 +66,7 @@ React web apps in this stack share shadcn/ui primitives through `packages/ui`.
 
 - Change design tokens and global styles in `packages/ui/src/styles/globals.css`
 - Update shared primitives in `packages/ui/src/components/*`
-- Adjust shadcn aliases or style config in `packages/ui/components.json` and `apps/web/components.json`
+- Adjust shadcn aliases or style config in `packages/ui/components.json` and `apps/staff/components.json`
 
 ### Add more shared components
 
@@ -84,13 +84,13 @@ import { Button } from "@stay/ui/components/button";
 
 ### Add app-specific blocks
 
-If you want to add app-specific blocks instead of shared primitives, run the shadcn CLI from `apps/web`.
+If you want to add app-specific blocks instead of shared primitives, run the shadcn CLI from `apps/staff`.
 
 ## Deployment
 
 ### Alchemy
 
-- Target: web on Cloudflare
+- Target: staff on Cloudflare
 - Configure provider login: `cd packages/infra && pnpm exec alchemy login --configure`
 - Dev: pnpm run dev
 - Deploy: pnpm run deploy
@@ -113,7 +113,7 @@ cd packages/infra && pnpm exec alchemy deploy --stage production
 - Logs: pnpm run docker:logs
 - Stop: pnpm run docker:down
 
-Environment variables are read from each app's `.env` file (baked into web builds for public variables) and overridden in `docker-compose.yml` for container networking.
+Environment variables are read from each app's `.env` file (baked into frontend builds for public variables) and overridden in `docker-compose.yml` for container networking.
 
 For more details, see the guide on [Deploying with Docker Compose](https://www.better-t-stack.dev/docs/guides/docker).
 
@@ -127,7 +127,7 @@ For more details, see the guide on [Deploying with Docker Compose](https://www.b
 ```text
 stay/
 ├── apps/
-│   ├── web/         # Frontend application (React + TanStack Router)
+│   ├── staff/       # Staff frontend application (React + TanStack Router)
 │   └── server/      # Backend API (Hono)
 ├── packages/
 │   ├── ui/          # Shared shadcn/ui components and styles
@@ -139,7 +139,7 @@ stay/
 
 - `pnpm run dev`: Start all applications in development mode
 - `pnpm run build`: Build all applications
-- `pnpm run dev:web`: Start only the web application
+- `pnpm run dev:staff`: Start only the staff application
 - `pnpm run dev:server`: Start only the server
 - `pnpm run types:check`: Check TypeScript types across all apps
 - `pnpm run db:push`: Push schema changes to database
