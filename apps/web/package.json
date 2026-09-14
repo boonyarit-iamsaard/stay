@@ -20,7 +20,7 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "sonner": "catalog:",
-    "srvx": "^0.11.22",
+    "srvx": "^1.0.4",
     "zod": "catalog:"
   },
   "devDependencies": {
