@@ -40,15 +40,15 @@ overrides:
 
 catalog:
   dotenv: ^17.4.2
-  zod: ^4.5.4
+  zod: ^4.6.5
   typescript: ^7.0.2
-  "@types/node": ^26.2.0
-  better-auth: 1.7.2
-  lucide-react: ^1.41.0
+  "@types/node": ^26.6.1
+  better-auth: 1.7.5
+  lucide-react: ^1.47.0
   next-themes: ^0.4.6
-  react: ^19.2.8
-  react-dom: ^19.2.8
+  react: ^19.3.0
+  react-dom: ^19.3.0
   sonner: ^2.0.7
-  "@types/react": ^19.2.17
-  "@types/react-dom": ^19.2.3
+  "@types/react": ^19.3.0
+  "@types/react-dom": ^19.3.0
   tailwindcss: ^4.3.3
